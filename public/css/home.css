@@ -1,0 +1,104 @@
+body {
+  height: 100vh;
+  background-color: black;
+  font-family: "Open Sans", sans-serif;
+  color: white;
+}
+.hero {
+  height: 100vh;
+}
+.logo-container {
+  width: 400px;
+}
+.logo-container img {
+  width: 100%;
+}
+.hero h1 {
+  color: white;
+  font-size: 4rem;
+  font-weight: 800;
+}
+.hero h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.sign-up button {
+  font-weight: 500;
+  border: none;
+  font-size: 1rem;
+  width: 100%;
+}
+.or {
+  vertical-align: sub;
+}
+.policy button {
+  background-color: #1a8cd8;
+  color: white;
+  font-weight: 600;
+}
+.policy p {
+  font-size: 12px;
+  color: grey;
+}
+.policy p a {
+  text-decoration: none;
+}
+
+.sign-in h3 {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.sign-in button {
+  background-color: transparent;
+  color: #1a8cd8;
+  font-weight: 600;
+  border: 1px solid #1a8cd8;
+}
+
+/* modal */
+.modal-content {
+  background-color: black;
+}
+.modal-header,
+.modal-footer {
+  border: none;
+}
+.createAccount .modal-body h2 {
+  font-weight: 700;
+}
+.createAccount .modal-body .form-floating input {
+  background-color: transparent;
+  color: grey;
+  border: 1px solid rgb(63, 63, 63);
+}
+
+.createAccount .modal-body .form-floating label {
+  font-size: 1rem;
+  color: grey !important;
+}
+
+.createAccount .form-floating label:after {
+  background-color: transparent !important;
+  color: red !important;
+}
+.createAccount button.rounded-pill {
+  background-color: #1a8cd8;
+  color: white;
+  font-weight: 500;
+}
+
+
+/* .form-floating > input + label:after {
+  background: red !important;
+} */
+
+@media (width < 500) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
+@media (width < 800) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+}

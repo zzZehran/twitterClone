@@ -1,0 +1,27 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-3 mb-3">
+  <h1 class="display-5 mb-5 text-center fw-bold">Tweets!</h1>
+  <a href="/tweets/new"
+    ><button class="btn btn-success mt-3">Make new tweet</button></a
+  >
+  <a href="/"><button class="btn btn-secondary mt-3">Home page</button></a>
+  <div class="row">
+    <% for(tweet of tweets) {%>
+    <div class="col-6">
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= tweet.tweet %></h5>
+          <p class="card-text">
+            -<%= tweet.user && tweet.user.username ? tweet.user.username:
+            "Unkown user" %>
+          </p>
+          <a href="/tweets/<%= tweet.id %>" class="card-link"
+            ><button class="btn btn-primary">See tweet</button></a
+          >
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>

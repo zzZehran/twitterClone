@@ -1,0 +1,40 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <h1 class="display-5 mb-5 text-center fw-bold">Make a new tweet</h1>
+
+  <div class="row justify-content-center mt-3">
+    <div class="col-5">
+      <form
+        action="/tweets"
+        method="post"
+        class="d-inline needs-validation"
+        novalidate
+      >
+        <!-- <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            required
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div> -->
+        <div class="mb-3">
+          <label for="tweet" class="form-label">Tweet</label>
+          <textarea
+            class="form-control"
+            id="tweet"
+            name="tweet"
+            required
+          ></textarea>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      <a href="/tweets"> <button class="btn btn-secondary">Go back</button></a>
+    </div>
+  </div>
+</div>

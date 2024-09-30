@@ -1,0 +1,32 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <h1 class="display-5 mb-5 text-center fw-bold">Edit Tweet</h1>
+
+  <div class="row justify-content-center mt-3">
+    <div class="col-5">
+      <form
+        action="/tweets/<%= tweet.id %>?_method=PATCH"
+        method="post"
+        class="d-inline"
+      >
+        <div class="mb-3">
+          <label for="tweet" class="form-label">Tweet</label>
+          <textarea class="form-control" id="tweet" name="tweet" required>
+<%= tweet.tweet %></textarea
+          >
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      <form
+        class="d-inline"
+        action="/tweets/<%= tweet.id  %>?_method=DELETE"
+        method="post"
+      >
+        <button class="btn btn-danger">Delete tweet</button>
+      </form>
+      <a href="/tweets"> <button class="btn btn-secondary">Go back</button></a>
+    </div>
+  </div>
+</div>
