@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Tweet = require("../models/tweet");
 const seed = require("./seed");
+const timestamp = require("time-stamp");
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/twitterClone")
@@ -12,6 +13,30 @@ mongoose
     console.log(err);
   });
 
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const getMonth = timestamp("MM");
+let date = timestamp("DD");
+let month = months[getMonth - 1];
+if (date.slice(0, 1) == 0) {
+  date = date.slice(1);
+  console.log("Day:", date);
+}
+console.log(date);
+
 const seedDB = async () => {
   await Tweet.deleteMany({});
   for (let i = 0; i <= 50; i++) {
@@ -20,6 +45,7 @@ const seedDB = async () => {
       user: "66f406cd53f7137126718b10",
       tweet: seed[random50].tweet,
       likes: seed[random50].likes,
+      date: `${month} ${date}`,
     });
     await camp.save();
   }
@@ -28,5 +54,3 @@ const seedDB = async () => {
 seedDB().then(() => {
   mongoose.connection.close();
 });
-
-// console.log(seed[0].tweet)

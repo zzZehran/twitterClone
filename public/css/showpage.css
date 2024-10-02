@@ -45,7 +45,6 @@ body {
 .postTweet textarea {
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid rgb(63, 63, 63);
   border-radius: 0;
   resize: none;
   color: white;
@@ -65,4 +64,21 @@ textarea:focus {
   color: white;
   padding: 0.3rem 1rem;
   border: none;
+}
+
+/* feed > tweets */
+.feed {
+  border-right: 1px solid rgb(63, 63, 63);
+  min-height: 100vh;
+}
+.card {
+  color: white;
+  background-color: transparent;
+}
+.card-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.card-body {
+  font-size: 1.25rem;
 }

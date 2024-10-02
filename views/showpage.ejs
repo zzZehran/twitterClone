@@ -17,7 +17,7 @@
       >
     </div>
 
-    <div class="feed col-6 d-flex flex-column ps-0">
+    <div class="feed col-7 d-flex flex-column ps-0">
       <div class="postTweet mt-2">
         <div class="row">
           <div class="col-2"></div>
@@ -25,18 +25,39 @@
             <textarea
               name=""
               id=""
-              class="form-control w-100"
+              class="form-control w-100 pb-0"
               placeholder="What is happening?!"
             ></textarea>
 
-            <div class="row">
+            <div class="row mb-3">
               <div class="d-flex justify-content-end">
-                <button class="rounded-pill mt-3">Post</button>
+                <button class="rounded-pill">Post</button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <% for(tweet of tweets) {%>
+      <div class="tweet" style="border-top: 1px solid rgb(63, 63, 63)">
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col ps-0">
+            <div class="card py-3">
+              <div class="card-header">
+                <%= tweet.user.username %>
+                <small class="text-secondary fw-normal fs-6"
+                  >@<%= tweet.user.id %> &bull; <%= tweet.date %></small
+                >
+              </div>
+              <div class="card-body pt-0">
+                <p><%= tweet.tweet %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
     </div>
   </div>
 </div>

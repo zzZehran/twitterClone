@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Comment = require("./comment");
+const { required } = require("joi");
 
 const tweetSchema = new mongoose.Schema({
   tweet: {
@@ -14,6 +15,10 @@ const tweetSchema = new mongoose.Schema({
       ref: "Comment",
     },
   ],
+  date: {
+    type: String,
+    required: true,
+  },
 });
 
 tweetSchema.post("findOneAndDelete", async function (doc) {

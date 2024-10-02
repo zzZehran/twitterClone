@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const Tweet = require("./models/tweet");
 
 const ejs = require("ejs");
 const ejsMate = require("ejs-mate");
@@ -76,8 +77,9 @@ app.get("/", (req, res) => {
   res.render("home", { flag });
 });
 
-app.get("/showpage", (req, res) => {
-  res.render("showpage");
+app.get("/showpage", async (req, res) => {
+  const tweets = await Tweet.find({}).populate("user", "username");
+  res.render("showpage", { tweets });
 });
 
 app.use((err, req, res, next) => {
