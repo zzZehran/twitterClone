@@ -20,6 +20,7 @@ const adminRoutes = require("./routes/admin");
 const tweetRoutes = require("./routes/tweets");
 const commentRoutes = require("./routes/comments");
 const userRoutes = require("./routes/user");
+const { isLoggedIn } = require("./middleware");
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/twitterClone")
@@ -73,11 +74,9 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.get("/", (req, res) => {
-  const flag = true;
   res.render("home", { flag });
 });
-
-app.get("/showpage", async (req, res) => {
+app.get("/showpage", isLoggedIn, async (req, res) => {
   const tweets = await Tweet.find({}).populate("user", "username");
   res.render("showpage", { tweets });
 });
