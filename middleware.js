@@ -1,6 +1,7 @@
 const Tweet = require("./models/tweet");
 const Comment = require("./models/comment");
 const { tweetSchema, commnetSchema, commentSchema } = require("./schema");
+const AppError = require("./utilities/AppError");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {

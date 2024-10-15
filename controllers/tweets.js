@@ -1,8 +1,33 @@
 const Tweet = require("../models/tweet");
 const Comment = require("../models/comment");
 const AppError = require("../utilities/AppError");
+const timestamp = require("time-stamp");
 
 const ObjectID = require("mongoose").Types.ObjectId;
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const getMonth = timestamp("MM");
+let date = timestamp("DD");
+let month = months[getMonth - 1];
+if (date.slice(0, 1) == 0) {
+  date = date.slice(1);
+  console.log("Day:", date);
+}
+console.log(date);
 
 module.exports.index = async (req, res) => {
   const tweets = await Tweet.find({}).populate("user", "username");
@@ -51,6 +76,7 @@ module.exports.makeTweet = async (req, res) => {
   const tweet = new Tweet({
     tweet: req.body.tweet,
     user: req.user._id,
+    date: `${month} ${date}`,
   });
   await tweet.save();
   req.flash("success", "Tweeted successfully");
