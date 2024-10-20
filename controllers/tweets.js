@@ -30,8 +30,11 @@ if (date.slice(0, 1) == 0) {
 console.log(date);
 
 module.exports.index = async (req, res) => {
-  const tweets = await Tweet.find({}).populate("user", "username");
-  res.render("tweets/index", { tweets });
+  const tweets = await Tweet.find({})
+    .sort({ createdAt: -1 })
+    .populate("user", "username");
+  res.render("tweets/feed", { tweets });
+  // res.render("tweets/index", { tweets });
 };
 
 module.exports.newTweetForm = (req, res) => {

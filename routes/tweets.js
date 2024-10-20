@@ -13,7 +13,7 @@ const comments = require("../controllers/comments");
 
 router
   .route("/")
-  .get(catchAsync(tweets.index))
+  .get(isLoggedIn, catchAsync(tweets.index))
   .post(isLoggedIn, validateTweet, catchAsync(tweets.makeTweet));
 
 router.get("/new", isLoggedIn, catchAsync(tweets.newTweetForm));

@@ -74,12 +74,15 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.get("/", (req, res) => {
-  res.render("home", { flag });
+  if (!res.locals.currentUser) {
+    res.render("home");
+  }
+  res.redirect("/tweets");
 });
-app.get("/showpage", isLoggedIn, async (req, res) => {
-  const tweets = await Tweet.find({}).populate("user", "username");
-  res.render("showpage", { tweets });
-});
+// app.get("/showpage", isLoggedIn, async (req, res) => {
+//   const tweets = await Tweet.find({}).populate("user", "username");
+//   res.render("showpage", { tweets });
+// });
 
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;

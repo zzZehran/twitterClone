@@ -84,6 +84,11 @@ textarea:focus {
 .feed {
   border-right: 1px solid rgb(63, 63, 63);
   min-height: 100vh;
+  max-height: 100vh;
+  overflow: auto;
+}
+.feed::-webkit-scrollbar {
+  display: none;
 }
 .card {
   color: white;
