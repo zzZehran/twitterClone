@@ -35,7 +35,6 @@ if (date.slice(0, 1) == 0) {
   date = date.slice(1);
   console.log("Day:", date);
 }
-console.log(date);
 
 const seedDB = async () => {
   await Tweet.deleteMany({});
@@ -44,7 +43,7 @@ const seedDB = async () => {
     const camp = new Tweet({
       user: "66f406cd53f7137126718b10",
       tweet: seed[random50].tweet,
-      likes: seed[random50].likes,
+      likes: "66f93d57f5672c1de6810e56",
       date: `${month} ${date}`,
     });
     await camp.save();

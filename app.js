@@ -84,6 +84,7 @@ app.get("/", (req, res) => {
 //   res.render("showpage", { tweets });
 // });
 
+
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   if (!err.message) err.message = "Oh no, somethign went wrong!";

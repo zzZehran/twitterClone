@@ -25,7 +25,10 @@ router
 
 router.get("/:id/edit", isLoggedIn, isAuthor, catchAsync(tweets.showEditForm));
 
-router.post("/:id/like", isLoggedIn, catchAsync(tweets.likeTweet));
+router
+  .route("/:id/like")
+  .post(isLoggedIn, catchAsync(tweets.likeTweet))
+  .post(isLoggedIn, catchAsync(tweets.heartTweet));
 
 router.delete("/:id", isAuthor, catchAsync(tweets.deleteTweet));
 

@@ -61,8 +61,22 @@
                   >@<%= tweet.user.id %> &bull; <%= tweet.date %></small
                 >
               </div>
-              <div class="card-body pt-0">
+              <div class="card-body py-0">
                 <p><%= tweet.tweet %></p>
+              </div>
+              <div class="card-footer">
+                <form
+                  action="/<%= tweet.id %>/like"
+                  method="post"
+                  class="d-inline"
+                >
+                  <button class="btn p-0" name="liked" value="true">
+                    <i class="bi bi-heart text-light"></i>
+                  </button>
+                </form>
+                <span class="fs-6 text-secondary"
+                  ><%= tweet.likes.length %></span
+                >
               </div>
             </div>
           </div>

@@ -122,3 +122,21 @@ module.exports.likeTweet = async (req, res) => {
   }
   res.redirect(`/tweets/${id}`);
 };
+
+module.exports.heartTweet = async (req, res) => {
+  const { id } = req.params;
+  const tweet = await Tweet.findById(id).populate("likes");
+  const isLiked = tweet.likes.some(
+    (like) => like._id.toString() === req.user._id.toString()
+  );
+  if (isLiked) {
+    tweet.likes = tweet.likes.filter((like) => !like._id.equals(req.user._id));
+    res.send("Unliked");
+    tweet.save();
+  } else {
+    tweet.likes.push(req.user);
+    res.send("Liked");
+    tweet.save();
+  }
+};
+
