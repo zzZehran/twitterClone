@@ -27,7 +27,6 @@ if (date.slice(0, 1) == 0) {
   date = date.slice(1);
   console.log("Day:", date);
 }
-console.log(date);
 
 module.exports.index = async (req, res) => {
   const tweets = await Tweet.find({})
@@ -131,12 +130,15 @@ module.exports.heartTweet = async (req, res) => {
   );
   if (isLiked) {
     tweet.likes = tweet.likes.filter((like) => !like._id.equals(req.user._id));
-    res.send("Unliked");
-    tweet.save();
+    // res.redirect("/tweets");
+    await tweet.save();
+    req.flash("error", "Removed like.");
+    res.redirect("/tweets");
   } else {
     tweet.likes.push(req.user);
-    res.send("Liked");
-    tweet.save();
+    // res.send("Liked");
+    await tweet.save();
+    req.flash("success", "Liked tweet.");
+    res.redirect("/tweets");
   }
 };
-

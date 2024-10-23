@@ -66,12 +66,21 @@
               </div>
               <div class="card-footer">
                 <form
-                  action="/<%= tweet.id %>/like"
+                  action="/tweets/<%= tweet.id %>/like"
                   method="post"
                   class="d-inline"
                 >
-                  <button class="btn p-0" name="liked" value="true">
+                  <button class="btn p-0" name="liked" value="true" id="heartBtn">
+                    <!-- <i class="bi bi-heart text-light"></i> -->
+
+                    <% if( tweet.likes.some((like) => like._id.toString() ===
+                    currentUser.id ) ) {%>
+                    <i class="bi bi-heart-fill text-danger"></i>
+                    <% } else { %>
                     <i class="bi bi-heart text-light"></i>
+
+                    <% } %>
+                    <!--  -->
                   </button>
                 </form>
                 <span class="fs-6 text-secondary"
