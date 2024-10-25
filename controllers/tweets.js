@@ -57,6 +57,7 @@ module.exports.showTweet = async (req, res, next) => {
     return next(new AppError("Tweet not found!", 404));
   }
 
+  // res.render("tweets/show", { tweet });
   res.render("tweets/show", { tweet });
 };
 
@@ -103,24 +104,24 @@ module.exports.deleteTweet = async (req, res) => {
   res.redirect("/tweets");
 };
 
-module.exports.likeTweet = async (req, res) => {
-  const { id } = req.params;
-  const tweet = await Tweet.findById(id);
-  console.log("hi");
+// module.exports.likeTweet = async (req, res) => {
+//   const { id } = req.params;
+//   const tweet = await Tweet.findById(id);
+//   console.log("hi");
 
-  if (!tweet.likes) {
-    tweet.likes = [];
-  }
+//   if (!tweet.likes) {
+//     tweet.likes = [];
+//   }
 
-  if (!tweet.likes.includes(req.user._id)) {
-    tweet.likes.push(req.user._id);
-    await tweet.save();
-    req.flash("success", "You liked the tweet.");
-  } else {
-    req.flash("error", "You have already liked this tweet.");
-  }
-  res.redirect(`/tweets/${id}`);
-};
+//   if (!tweet.likes.includes(req.user._id)) {
+//     tweet.likes.push(req.user._id);
+//     await tweet.save();
+//     req.flash("success", "You liked the tweet.");
+//   } else {
+//     req.flash("error", "You have already liked this tweet.");
+//   }
+//   res.redirect(`/tweets/${id}`);
+// };
 
 module.exports.heartTweet = async (req, res) => {
   const { id } = req.params;

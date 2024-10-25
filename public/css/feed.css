@@ -1,43 +1,4 @@
-body {
-  height: 100vh;
-  background-color: black;
-  font-family: "Open Sans", sans-serif;
-  color: white;
-}
-
-.nav-menu a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-top: 1.5rem;
-}
-.nav-menu a.active {
-  font-weight: 600;
-}
-
-.nav-menu {
-  border-right: 1px solid rgb(63, 63, 63);
-  min-height: 100vh;
-}
-
-.postBtn {
-  width: 80%;
-  padding: 0.5rem 0.5rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  border: none;
-  background-color: #1a8cd8;
-  color: white;
-  transition: background-color 0.2s ease-in;
-}
-.postBtn:hover {
-  background-color: rgb(24, 113, 172);
-  transition: background-color 0.2s ease-in;
-}
-
 /* Feed start */
-
 .postTweet {
   min-height: 15vh;
   max-height: 20vh;

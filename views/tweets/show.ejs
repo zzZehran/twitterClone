@@ -1,81 +1,109 @@
 <% layout("layouts/boilerplate") %>
-<link rel="stylesheet" href="/css/show.css" />
 
-<div class="container mt-5">
-  <div class="row justify-content-evenly">
-    <div class="col-4">
-      <h1 class="display-5 mb-4 text-center fw-bold">Tweet</h1>
-      <div class="card mt-3">
-        <div class="card-body">
-          <h5 class="card-title"><%= tweet.tweet %></h5>
-          <p class="card-text">-<%= tweet.user.username %></p>
-          <p class="card-text">Likes: <%= tweet.likes.length %></p>
-          <p class="card-text">Comments: <%= tweet.comments.length %></p>
-        </div>
-      </div>
+<link rel="stylesheet" href="/css/cpage.css" />
+<link rel="stylesheet" href="/css/feed.css" />
 
-      <% if(currentUser) {%>
-      <form action="/tweets/<%= tweet.id %>/like" method="post" class="mt-3">
-        <button type="submit" class="btn btn-sm btn-primary">Like</button>
-      </form>
-      <% } %> <% if(currentUser && tweet.user.equals(currentUser._id)) {%>
-      <a href="/tweets/<%= tweet.id %>/edit"
-        ><button class="btn btn-sm btn-success mt-4">Edit Tweet</button></a
-      >
-      <% } %>
-      <a href="/tweets"
-        ><button class="btn btn-sm btn-secondary mt-4">Go Back</button></a
-      >
-    </div>
-    <% if(currentUser) {%>
-    <div class="col-4">
-      <h1 class="display-6 mb-4 text-center fw-bold">Add comment</h1>
-      <div class="card px-5 py-3">
-        <form
-          action="/tweets/<%= tweet._id %>/comments"
-          method="post"
-          class="d-inline needs-validation"
-          novalidate
-        >
-          <div class="mb-3"></div>
-          <div class="mb-3">
-            <label for="tweet" class="form-label">Comment</label>
-            <textarea
-              class="form-control"
-              id="comment"
-              name="comment[body]"
-              required
-            ></textarea>
-            <div class="valid-feedback">Looks good!</div>
+<div class="container">
+  <div class="row">
+    <%- include("../partials/navMenu.ejs") %>
+    <div class="col-8">
+      <div class="tweet" style="border-top: 1px solid rgb(63, 63, 63)">
+        <div class="row">
+          <div class="col py-3 px-5">
+            <div class="card py-3">
+              <div class="card-header">
+                <%= tweet.user.username %>
+                <small class="text-secondary fw-normal fs-6"
+                  >@<%= tweet.user.id %> &bull; <%= tweet.date %></small
+                >
+              </div>
+              <div class="card-body py-0 position-relative">
+                <p class="fs-4"><%= tweet.tweet %></p>
+                <a href="/cpage/<%= tweet.id %>" class="stretched-link"> </a>
+              </div>
+              <div class="card-footer">
+                <form
+                  action="/tweets/<%= tweet.id %>/like"
+                  method="post"
+                  class="d-inline"
+                >
+                  <button
+                    class="btn p-0"
+                    name="liked"
+                    value="true"
+                    id="heartBtn"
+                  >
+                    <% if( tweet.likes.some((like) => like._id.toString() ===
+                    currentUser.id ) ) {%>
+                    <i class="bi bi-heart-fill text-danger"></i>
+                    <% } else { %>
+                    <i class="bi bi-heart text-light"></i>
+
+                    <% } %>
+                  </button>
+                </form>
+                <span class="fs-6 text-secondary"
+                  ><%= tweet.likes.length %></span
+                >
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-success">Submit</button>
-        </form>
-      </div>
-    </div>
-    <% } %>
-  </div>
-  <div class="row justify-content-evenly mt-5 mb-3">
-    <div class="col-4">
-      <h1 class="display-5 mb-4 text-center fw-bold">Comments</h1>
-      <% for(let comment of tweet.comments) {%>
-      <div class="card mt-3">
-        <div class="card-body">
-          <h5 class="card-title"><%= comment.body %></h5>
-          <!-- <p class="card-text">
-            -<%= tweet.user && tweet.user.username ? tweet.user.username:
-            "Unkown user" %>
-          </p> -->
-          <p class="card-text"><%= comment.user.username %></p>
-          <!-- <div class="card-footer">ID: <%= tweet.id %></div> -->
-          <form
-            action="/tweets/<%= tweet.id %>/comments/<%= comment._id %>?_method=DELETE"
-            method="post"
-          >
-            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-          </form>
+        </div>
+        <div class="row">
+          <% if(currentUser) {%>
+          <div class="col">
+            <h1 class="display-6 mb-4 text-center fw-bold">Add comment</h1>
+            <div class="card px-5 py-3">
+              <form
+                action="/tweets/<%= tweet._id %>/comments"
+                method="post"
+                class="d-inline needs-validation"
+                novalidate
+              >
+                <div class="mb-3"></div>
+                <div class="mb-3">
+                  <label for="tweet" class="form-label">Comment</label>
+                  <textarea
+                    class="form-control"
+                    id="comment"
+                    name="comment[body]"
+                    required
+                  ></textarea>
+                  <div class="valid-feedback">Looks good!</div>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+              </form>
+            </div>
+          </div>
+          <% } %>
+        </div>
+        <div class="row justify-content-evenly mt-5 mb-3">
+          <div class="col-12">
+            <h1 class="display-5 mb-4 text-center fw-bold">Comments</h1>
+            <% for(let comment of tweet.comments) {%>
+            <div class="card mt-3">
+              <div class="card-body">
+                <h5 class="card-title"><%= comment.body %></h5>
+                <!-- <p class="card-text">
+                    -<%= tweet.user && tweet.user.username ? tweet.user.username:
+                    "Unkown user" %>
+                  </p> -->
+                <p class="card-text"><%= comment.user.username %></p>
+                <!-- <div class="card-footer">ID: <%= tweet.id %></div> -->
+                <form
+                  action="/tweets/<%= tweet.id %>/comments/<%= comment._id %>?_method=DELETE"
+                  method="post"
+                >
+                  <button type="submit" class="btn btn-sm btn-danger">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+            <% } %>
+          </div>
         </div>
       </div>
-      <% } %>
     </div>
   </div>
 </div>

@@ -4,19 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="nav-menu col-2 d-flex flex-column">
-      <a href="#" class="active"><i class="bi bi-house-fill me-3"></i> Home</a>
-      <a href="#"><i class="bi bi-search me-3"></i> Explore</a>
-      <a href="#"><i class="bi bi-bell me-3"></i> Notifications</a>
-      <a href="#"><i class="bi bi-envelope-open me-3"></i> Messages</a>
-      <a href="#"><i class="bi bi-people me-3"></i> Communities</a>
-      <a href="#"><i class="bi bi-person me-3"></i>Profile</a>
-      <a href="#"><i class="bi bi-three-dots me-3"></i> More</a>
-      <a href="/tweets/new"
-        ><button class="postBtn rounded-pill">Post</button></a
-      >
-    </div>
-
+    <%- include("../partials/navMenu.ejs") %>
     <div class="feed col-8 d-flex flex-column ps-0">
       <div class="postTweet mt-2">
         <div class="row">
@@ -61,8 +49,9 @@
                   >@<%= tweet.user.id %> &bull; <%= tweet.date %></small
                 >
               </div>
-              <div class="card-body py-0">
+              <div class="card-body py-0 position-relative">
                 <p><%= tweet.tweet %></p>
+                <a href="/tweets/<%= tweet.id %>" class="stretched-link"> </a>
               </div>
               <div class="card-footer">
                 <form
@@ -70,7 +59,12 @@
                   method="post"
                   class="d-inline"
                 >
-                  <button class="btn p-0" name="liked" value="true" id="heartBtn">
+                  <button
+                    class="btn p-0"
+                    name="liked"
+                    value="true"
+                    id="heartBtn"
+                  >
                     <!-- <i class="bi bi-heart text-light"></i> -->
 
                     <% if( tweet.likes.some((like) => like._id.toString() ===
